@@ -5,9 +5,9 @@ let offset = 0;
 
 
 function loadPokemonItems(offset, limit) {
-    pokeApi.getPokemons(offset, limit).then((pokemons = []) => { 
-        const newHtml = pokemons.map(pokemon) => `
-                <li class="pokemon ${pokemon.type}">
+     function convertPokemonToLi(pokemon){              
+            return `
+                <li class="pokemon ${pokemon.type}">u9p-
                     <span class="number">#${pokemon.number}</span>
                     <span class="name">${pokemon.name}</span>
         
@@ -20,11 +20,16 @@ function loadPokemonItems(offset, limit) {
                             alt="${pokemon.name}">
                      </div>
                 </li>
-            `} .join('')
+            `     
+    }
 
-         pokemonList.innerHTML += newHtml
-        })
+
+    pokeApi.getPokemons(offset, limit).then((pokemons = []) => { 
+        const newHtml = pokemons.map(convertPokemonToLi).join('')
+        pokemonList.innerHTML += newHtml
+    })
 }
+
 loadPokemonItems(limit, offset)
 
 loadMoreButton.addEventListener('click', () => { 
